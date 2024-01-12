@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Exchange</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="exchangeForm">
+        <input type="text" id="nczAddress" placeholder="NanoCheeZE Address"><br>
+        <input type="text" id="dogeAddress" placeholder="Dogecoin Address"><br>
+        <input type="number" id="amount" placeholder="Amount"><br>
+        <select id="direction">
+            <option value="NCZtoDOGE">NCZ to DOGE</option>
+            <option value="DOGEtoNCZ">DOGE to NCZ</option>
+        </select><br>
+        <button type="submit">Exchange</button>
+    </form>
+
+    <script>
+    $(document).ready(function(){
+        $("#exchangeForm").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: 'https://xtdevelopment.net/ex/process_exchange.php',
+                type: 'post',
+                data: {
+                    nczAddress: $("#nczAddress").val(),
+                    dogeAddress: $("#dogeAddress").val(),
+                    amount: $("#amount").val(),
+                    direction: $("#direction").val()
+                },
+                success: function(response){
+                    alert(response);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
